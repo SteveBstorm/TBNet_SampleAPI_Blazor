@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SampleAPI_Blazor.Models;
 using SampleAPI_Blazor.Services;
@@ -21,6 +22,7 @@ namespace SampleAPI_Blazor.Controllers
             return Ok(_movieRepo.GetById(id));
         }
 
+        [Authorize("Admin")]
         [HttpPost]
         public IActionResult Create(MovieDTO movieDTO)
         {
@@ -28,6 +30,7 @@ namespace SampleAPI_Blazor.Controllers
             return Ok();
         }
 
+        [Authorize("Admin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
